@@ -17,3 +17,14 @@ export function validateCV(cv: CV): boolean {
     const isValid = validate(cv);
     return isValid;
 };
+
+
+export async function fetchCVFromUrl(url: string): Promise<CV | null> {
+    try {
+      const response = await fetch(url);
+      const cv: CV = await response.json();
+      return cv;
+    } catch (error) {
+      return null;
+    }
+  }
