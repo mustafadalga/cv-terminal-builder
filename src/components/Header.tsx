@@ -14,7 +14,7 @@ export default function ({ title, githubUrl }: Props) {
                     {title}
                 </Typography>
                 <Button variant="contained" color="primary" >
-                    Show Code
+                    Generate Code
                 </Button>
                 <IconButton edge="end" color="inherit" aria-label="github" href={githubUrl} target="_blank"
                             rel="noopener noreferrer">
