@@ -1,0 +1,20 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+#terminal {
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+#terminal .xterm-screen {
+  height: 100%;
+  max-width: 100%;
+  overflow-y: auto;
+}
+#terminal .xterm-viewport {
+  background-color: transparent !important;
+}

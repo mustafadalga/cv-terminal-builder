@@ -1,0 +1,11 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.icon {
+  font-size: 18px;
+  cursor: pointer;
+  color: #1976d2;
+}
