@@ -22,24 +22,28 @@ export interface CV {
   [section: string]: string[];
 }
 
-export interface Size{
+export interface Size {
   rows: number;
-    cols: number;
+  cols: number;
 }
-
 export interface Terminal {
   prompt: string;
   fontFamily: string;
   fontSize: number;
-  bodyBackground: string;
-  background: string;
+  pageColor: string;
+  defaultImage:string;
+  isBackgroundImageEnabled:boolean;
+  pageBackgroundImage: string;
+  terminalColor: string;
   textColor: string;
   cursorColor: string;
   textShadow: Shadow;
   boxShadow: Shadow;
   borderRadius: number;
   border: Border;
-  size:Size
+  blur: number;
+  opacity: number;
+  size: Size;
   margin: MarginPadding;
   padding: MarginPadding;
 }
@@ -53,4 +57,11 @@ export interface CVSchema {
       type: string;
     };
   };
+}
+
+export interface RGBColor {
+  r: number;
+  g: number;
+  b: number;
+  a?: number;
 }
