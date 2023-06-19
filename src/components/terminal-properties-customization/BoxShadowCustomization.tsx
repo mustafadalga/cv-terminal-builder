@@ -1,25 +1,21 @@
 import { TextField, Box, Typography } from '@mui/material';
 import { useState } from "react";
 import { useStore } from "@/store";
-import type { MarginPadding } from "@/types";
+import type { Shadow } from '@/types';
 
+export default function BoxShadowCustomization() {
+    const defaultBoxShadow = useStore<Shadow>((state) => state.terminal.boxShadow);
+    const [boxShadow, setBoxShadow] = useState<Shadow>(defaultBoxShadow);
 
-export default function () {
-    const defaultPadding = useStore<MarginPadding>(
-        (state) => state.terminal.padding
-      );
-      const [padding, setPadding] = useState<MarginPadding>(defaultPadding);
-    
-      const handlePaddingChange = (property: string, value: string | number) => {
-        const updatedPadding = {
-          ...padding,
-          [property]: value,
-        };
-        setPadding(updatedPadding);
-        useStore.setState((state) => ({
-          terminal: { ...state.terminal, padding: updatedPadding },
-        }));
+    const handleBoxShadowChange = (property: string, value: string | number) => {
+        const updatedBoxShadow = {
+             ...boxShadow, 
+             [property]: value 
+            };
+        setBoxShadow(updatedBoxShadow);
+        useStore.setState((state) => ({ terminal: { ...state.terminal, boxShadow: updatedBoxShadow } }));
       };
+      
     return (
         <Box
             sx={{
@@ -32,7 +28,7 @@ export default function () {
             }}
         >
             <Typography variant="h6" gutterBottom component="div">
-                Padding
+                Box Shadow
             </Typography>
             <Box sx={{
                 display: "grid",
@@ -40,47 +36,50 @@ export default function () {
                 "grid-template-columns": "repeat(2, minmax(0, 1fr))"
             }}>
                 <TextField
-                    label="Padding Top"
+                    label="Horizontal Length"
                     type="number"
+                    fullWidth
                     InputLabelProps={{
                         shrink: true,
                     }}
                     variant="standard"
-                    value={padding.top}
-                    onChange={(e) => handlePaddingChange("top", parseInt(e.target.value))}
+                    value={boxShadow.xOffset}
+                    onChange={(e) => handleBoxShadowChange('xOffset', parseInt(e.target.value))}
                 />
                 <TextField
-                    label="Padding Bottom"
+                    label="Vertical Length"
                     type="number"
+                    fullWidth
                     InputLabelProps={{
                         shrink: true,
                     }}
                     variant="standard"
-                    value={padding.bottom}
-                    onChange={(e) => handlePaddingChange("bottom", parseInt(e.target.value))}
+                    value={boxShadow.yOffset}
+                    onChange={(e) => handleBoxShadowChange('yOffset', parseInt(e.target.value))}
                 />
                 <TextField
-                    label="Padding Left"
+                    label="Blur Radius"
                     type="number"
+                    fullWidth
                     InputLabelProps={{
                         shrink: true,
                     }}
                     variant="standard"
-                    value={padding.left}
-                    onChange={(e) => handlePaddingChange("left", parseInt(e.target.value))}
+                    value={boxShadow.blurRadius}
+                    onChange={(e) => handleBoxShadowChange('blurRadius', parseInt(e.target.value))}
                 />
                 <TextField
-                    label="Padding Right"
-                    type="number"
+                    label="Color"
+                    type="color"
+                    fullWidth
                     InputLabelProps={{
                         shrink: true,
                     }}
                     variant="standard"
-                    value={padding.right}
-                    onChange={(e) => handlePaddingChange("right", parseInt(e.target.value))}
+                    value={boxShadow.color}
+                    onChange={(e) => handleBoxShadowChange('color', e.target.value)}
                 />
             </Box>
         </Box>
     );
 };
-
