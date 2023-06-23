@@ -1,51 +1,5 @@
-export interface Border {
-  style: string;
-  width: number;
-  color: string;
-}
-
-export interface Shadow {
-  xOffset: number;
-  yOffset: number;
-  blurRadius: number;
-  color: string;
-}
-
-export interface MarginPadding {
-  left: number;
-  right: number;
-  top: number;
-  bottom: number;
-}
-
 export interface CV {
   [section: string]: string[];
-}
-
-export interface Size {
-  rows: number;
-  cols: number;
-}
-export interface Terminal {
-  prompt: string;
-  fontFamily: string;
-  fontSize: number;
-  pageColor: string;
-  defaultImage:string;
-  isBackgroundImageEnabled:boolean;
-  pageBackgroundImage: string;
-  terminalColor: string;
-  textColor: string;
-  cursorColor: string;
-  textShadow: Shadow;
-  boxShadow: Shadow;
-  borderRadius: number;
-  border: Border;
-  blur: number;
-  opacity: number;
-  size: Size;
-  margin: MarginPadding;
-  padding: MarginPadding;
 }
 
 export interface CVSchema {
@@ -64,4 +18,36 @@ export interface RGBColor {
   g: number;
   b: number;
   a?: number;
+}
+
+export interface XtermOptions {
+  fontFamily: string;
+  fontSize: number;
+  cursorStyle?: "block" | "underline" | "bar";
+  cursorBlink: boolean;
+  rows: number;
+  cols: number;
+  theme: {
+    background: string;
+    foreground: string;
+    cursor: string;
+  };
+}
+
+export interface CVConfig {
+  commands: string[];
+  cvSections: string[];
+  cv: CV;
+  prompt: string;
+}
+export interface AddonConfig {
+  instance: new () => unknown;
+  autoFit?: boolean;
+}
+
+export interface CVTerminalConfig {
+  terminal: XtermOptions;
+  cv: CVConfig;
+  addons: AddonConfig[];
+  container: HTMLDivElement | null;
 }
