@@ -1,29 +1,35 @@
-import {
-  Typography,
-  SliderValueLabel,
-  Slider,
-  Grid,
-} from "@mui/material";
+import { Typography, SliderValueLabel, Slider, Grid } from "@mui/material";
 import { useState } from "react";
 import { useStore } from "@/store";
-import type { Shadow } from "@/types";
+import type { Shadow } from "@/store";
 import ColorPicker from "./ColorPicker";
 import Box from "./Box";
+
+const styles = {
+  gridStyles: {
+    display: "grid",
+    gap: "12px",
+    gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+  },
+  fontSize: {
+    fontSize: 13,
+  }
+  //...
+};
+
 export default function BoxShadowCustomization() {
   const defaultBoxShadow = useStore<Shadow>(
     (state) => state.terminal.boxShadow
   );
   const [boxShadow, setBoxShadow] = useState<Shadow>(defaultBoxShadow);
 
-  const handleBoxShadowChange = (property: string, value: string | number) => {
+  const updateBoxShadowProperty = (property: string, value: string | number) => {
     const updatedBoxShadow = {
       ...boxShadow,
       [property]: value,
     };
     setBoxShadow(updatedBoxShadow);
-    useStore.setState((state) => ({
-      terminal: { ...state.terminal, boxShadow: updatedBoxShadow },
-    }));
+    useStore.getState().setBoxShadow(updatedBoxShadow);
   };
 
   return (
@@ -32,17 +38,11 @@ export default function BoxShadowCustomization() {
         Box Shadow
       </Typography>
       <Box
-        sx={{
-          display: "grid",
-          gap: "12px",
-         gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
-        }}
+        sx={styles.gridStyles}
       >
         <Grid container>
           <Typography
-            sx={{
-              fontSize: 13,
-            }}
+            sx={styles.fontSize}
           >
             Horizontal Length
           </Typography>
@@ -52,8 +52,8 @@ export default function BoxShadowCustomization() {
             slots={{
               valueLabel: SliderValueLabel,
             }}
-            onChange={(e, value) =>
-              handleBoxShadowChange("xOffset", Number(value))
+            onChange={(_, value) =>
+              updateBoxShadowProperty("xOffset", Number(value))
             }
           />
         </Grid>
@@ -71,8 +71,8 @@ export default function BoxShadowCustomization() {
             slots={{
               valueLabel: SliderValueLabel,
             }}
-            onChange={(e, value) =>
-              handleBoxShadowChange("yOffset", Number(value))
+            onChange={(_, value) =>
+              updateBoxShadowProperty("yOffset", Number(value))
             }
           />
         </Grid>
@@ -90,8 +90,8 @@ export default function BoxShadowCustomization() {
             slots={{
               valueLabel: SliderValueLabel,
             }}
-            onChange={(e, value) =>
-              handleBoxShadowChange("blurRadius", Number(value))
+            onChange={(_, value) =>
+              updateBoxShadowProperty("blurRadius", Number(value))
             }
           />
         </Grid>
@@ -100,7 +100,7 @@ export default function BoxShadowCustomization() {
           initialColor={boxShadow.color}
           label="Color"
           onColorChange={(color: string) =>
-            handleBoxShadowChange("color", color)
+            updateBoxShadowProperty("color", color)
           }
         />
       </Box>

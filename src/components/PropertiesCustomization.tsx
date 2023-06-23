@@ -12,7 +12,7 @@ import GlassmorphismCustomization from "./GlassmorphismCustomization";
 
 
 
-export default function () {
+export default function PropertiesCustomization() {
   return (
     <Grid container gap={5}>
       <Grid item xs={12}>

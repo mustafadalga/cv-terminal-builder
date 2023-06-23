@@ -1,12 +1,28 @@
 import { Grid, Typography } from "@mui/material";
 import { useState } from "react";
-import { CV } from "@/types";
+import type { CV } from "@/types";
 import { useStore, type State } from "@/store";
 import { fetchCVFromUrl, validateCV } from "@/composables";
 import URLInput from "@/components/URLInput";
 import FileUpload from "@/components/FileUpload";
 import Box from "./Box";
-export default function () {
+
+async function processCV(cv: CV | null, setValidationMessage: (message: string) => void, setJsonCV: State["setJsonCV"], createCommands: State["createCommands"]) {
+  if (!cv) {
+    return setValidationMessage("Error fetching CV");
+  }
+  
+  const isValid = validateCV(cv);
+  
+  if (!isValid) {
+    return setValidationMessage("Invalid CV schema");
+  }
+  
+  setJsonCV(cv);
+  createCommands(Object.keys(cv));
+}
+
+export default function CVDataInput() {
   const [validationMessage, setValidationMessage] = useState<string>("");
   const [url, setURL] = useState<string>("");
   const setJsonCV = useStore((state: State) => state.setJsonCV);
@@ -23,22 +39,11 @@ export default function () {
     reset();
     setURL(url);
     const cv: CV | null = await fetchCVFromUrl(url);
-
-    if (!cv) {
-      return setValidationMessage("Error fetching CV");
-    }
-
-    const isValid = validateCV(cv);
-
-    if (!isValid) {
-      return setValidationMessage("Invalid CV schema");
-    }
-
-    setJsonCV(cv);
-    createCommands(Object.keys(cv));
+    
+    await processCV(cv, setValidationMessage, setJsonCV, createCommands);
   };
 
-  const handleFile = (target: HTMLInputElement) => {
+  const handleFile = async (target: HTMLInputElement) => {
     reset();
     const file = target.files?.[0] || null;
 
@@ -47,21 +52,16 @@ export default function () {
     }
 
     const reader = new FileReader();
-    reader.onload = (e) => {
+    
+    reader.onload = async (e) => {
       try {
         const cv = JSON.parse(e.target?.result as string);
-        const isValid = validateCV(cv);
-
-        if (!isValid) {
-          return setValidationMessage("Invalid CV schema");
-        }
-
-        setJsonCV(cv);
-        createCommands(Object.keys(cv));
+        await processCV(cv, setValidationMessage, setJsonCV, createCommands);
       } catch (error) {
         setValidationMessage("Error parsing JSON");
       }
     };
+    
     reader.readAsText(file);
   };
 

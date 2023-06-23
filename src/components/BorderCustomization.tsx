@@ -9,10 +9,10 @@ import {
   Slider,
   SliderValueLabel,
 } from "@mui/material";
-import Box from "./Box"
+import Box from "./Box";
 import { useState } from "react";
 import { useStore } from "@/store";
-import type { Border } from "@/types";
+import type { Border } from "@/store";
 
 const borderStyles: string[] = [
   "none",
@@ -33,6 +33,12 @@ const menuItemStyles = {
   },
 };
 
+const boxStyles = {
+  display: "grid",
+  gap: "12px",
+  gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+};
+
 export default function BorderCustomization() {
   const defaultBorder = useStore<Border>((state) => state.terminal.border);
   const defaultBorderRadius = useStore<number>(
@@ -47,17 +53,12 @@ export default function BorderCustomization() {
       [property]: value,
     };
     setBorder(updatedBorder);
-    useStore.setState((state) => ({
-      terminal: { ...state.terminal, border: updatedBorder },
-    }));
+    useStore.getState().setTerminalBorder(updatedBorder);
   };
 
   const handleBorderRadiusChange = (value: number) => {
-    const borderRadius = parseInt(value);
-    setBorderRadius(borderRadius);
-    useStore.setState((state) => ({
-      terminal: { ...state.terminal, borderRadius },
-    }));
+    setBorderRadius(value);
+    useStore.getState().setTerminalBorderRadius(value);
   };
 
   return (
@@ -65,13 +66,7 @@ export default function BorderCustomization() {
       <Typography variant="h6" gutterBottom component="div">
         Border
       </Typography>
-      <Box
-        sx={{
-          display: "grid",
-          gap: "12px",
-        gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
-        }}
-      >
+      <Box sx={boxStyles}>
         <Grid container>
           <Typography
             sx={{
@@ -86,7 +81,7 @@ export default function BorderCustomization() {
             slots={{
               valueLabel: SliderValueLabel,
             }}
-            onChange={(e, value) => handleBorderChange("width", Number(value))}
+            onChange={(_, value) => handleBorderChange("width", Number(value))}
           />
         </Grid>
         <TextField
@@ -116,8 +111,12 @@ export default function BorderCustomization() {
           id="demo-simple-select-standard"
           sx={menuItemStyles}
         >
-          {borderStyles.map((borderStyle, index) => (
-            <MenuItem key={index} value={borderStyle} sx={{ fontSize: 13 }}>
+          {borderStyles.map((borderStyle) => (
+            <MenuItem
+              key={borderStyle}
+              value={borderStyle}
+              sx={{ fontSize: 13 }}
+            >
               {borderStyle}
             </MenuItem>
           ))}
@@ -137,7 +136,7 @@ export default function BorderCustomization() {
           slots={{
             valueLabel: SliderValueLabel,
           }}
-          onChange={(e, value) => handleBorderRadiusChange(Number(value))}
+          onChange={(_, value) => handleBorderRadiusChange(Number(value))}
         />
       </Grid>
     </Box>

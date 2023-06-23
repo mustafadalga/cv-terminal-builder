@@ -1,8 +1,8 @@
-import { Button, Grid, Typography } from "@mui/material";
 import { useState } from "react";
 import { useStore, type State } from "@/store";
 import URLInput from "@/components/URLInput";
 import FileUpload from "@/components/FileUpload";
+import { Grid, Typography } from "@mui/material";
 import Box from "./Box";
 import ReplayIcon from "@mui/icons-material/Replay";
 import HideImageIcon from "@mui/icons-material/HideImage";
@@ -24,14 +24,18 @@ export default function BackgroundInput() {
     (state: State) => state.toggleBackgroundImage
   );
 
-  const reset = () => {
+  const resetForm = () => {
     setDefaultBackgroundImage();
     setURL("");
     setValidationMessage("");
   };
 
   const handleURL = async (url: string) => {
-    reset();
+    resetForm();
+    if (!url.length){
+      return setValidationMessage("Please enter a valid url!");
+    }
+
     setURL(url);
 
     try {
@@ -42,7 +46,7 @@ export default function BackgroundInput() {
   };
 
   const handleFile = (target: HTMLInputElement) => {
-    reset();
+    resetForm();
     try {
       const file = target.files?.[0] || null;
 
@@ -54,6 +58,10 @@ export default function BackgroundInput() {
     } catch (error) {
       setValidationMessage("Error occurred while processing the file");
     }
+  };
+
+  const toggleBackground = () => {
+    toggleBackgroundImage(!isBackgroundImageEnabled);
   };
 
   return (
@@ -81,14 +89,14 @@ export default function BackgroundInput() {
             handleFile={handleFile}
           />
         </Grid>
-        <Grid container xs={12} justifyContent="center" gap={1}>
+        <Grid item container xs={12} justifyContent="center" gap={1}>
          <ReplayIcon 
                className="icon"
-                     onClick={reset} />
+                     onClick={resetForm} />
 
 {isBackgroundImageEnabled ? 
-<ImageIcon        className="icon"  onClick={() => toggleBackgroundImage(!isBackgroundImageEnabled)}/> : 
-<HideImageIcon         className="icon"  onClick={() => toggleBackgroundImage(!isBackgroundImageEnabled)}/>}
+<ImageIcon        className="icon"  onClick={() => toggleBackground()}/> : 
+<HideImageIcon         className="icon"  onClick={() => toggleBackground()}/>}
 
          </Grid>
         {validationMessage && (

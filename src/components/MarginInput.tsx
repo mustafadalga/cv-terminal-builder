@@ -6,9 +6,9 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useStore } from "@/store";
-import type { MarginPadding } from "@/types";
+import type { MarginPadding } from "@/store";
 import Box from "./Box";
-export default function () {
+export default function MarginInput() {
   const defaultMargin = useStore<MarginPadding>(
     (state) => state.terminal.margin
   );
@@ -20,9 +20,7 @@ export default function () {
       [property]: Number(value),
     };
     setMargin(updatedMargin);
-    useStore.setState((state) => ({
-      terminal: { ...state.terminal, margin: updatedMargin },
-    }));
+    useStore.getState().setTerminalMargin(updatedMargin);
   };
 
   return (
@@ -43,7 +41,7 @@ export default function () {
             slots={{
               valueLabel: SliderValueLabel,
             }}
-            onChange={(e, value) => handleMarginChange("top", Number(value))}
+            onChange={(_, value) => handleMarginChange("top", Number(value))}
           />
         </Grid>
         <Grid item xs={6}>
@@ -58,7 +56,7 @@ export default function () {
             slots={{
               valueLabel: SliderValueLabel,
             }}
-            onChange={(e, value) => handleMarginChange("bottom", Number(value))}
+            onChange={(_, value) => handleMarginChange("bottom", Number(value))}
           />
         </Grid>
         <Grid item xs={6}>
@@ -73,7 +71,7 @@ export default function () {
             slots={{
               valueLabel: SliderValueLabel,
             }}
-            onChange={(e, value) => handleMarginChange("left", Number(value))}
+            onChange={(_, value) => handleMarginChange("left", Number(value))}
           />
         </Grid>
         <Grid item xs={6}>
@@ -88,7 +86,7 @@ export default function () {
               valueLabel: SliderValueLabel,
             }}
             value={margin.right}
-            onChange={(e, value) => handleMarginChange("right", Number(value))}
+            onChange={(_, value) => handleMarginChange("right", Number(value))}
           />
         </Grid>
       </Grid>

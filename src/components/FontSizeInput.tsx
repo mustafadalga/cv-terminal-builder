@@ -2,7 +2,7 @@ import { TextField } from "@mui/material";
 import { useState } from "react";
 import { useStore } from "@/store";
 
-export default function () {
+export default function FontSizeInput() {
   const defaultFontSize: number = useStore((state) => state.terminal.fontSize);
   const [fontSize, setFontSize] = useState<number>(defaultFontSize);
 
@@ -20,7 +20,7 @@ export default function () {
       defaultValue={fontSize}
       InputLabelProps={{
         shrink: true,
-        sx: { fontSize: 13 }, // Set label font size to 12
+        sx: { fontSize: 13 }
       }}
       inputProps={{
         min: 10,

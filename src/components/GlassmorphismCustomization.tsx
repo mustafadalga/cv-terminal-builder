@@ -1,9 +1,8 @@
-import { Size } from "@/types";
 import { Grid, Slider, SliderValueLabel, Typography } from "@mui/material";
 import { useState } from "react";
 import { useStore } from "@/store";
 import Box from "./Box";
-export default function () {
+export default function GlassmorphismCustomization() {
   const terminalBlur = useStore<number>((state) => state.terminal.blur);
   const terminalOpacity = useStore<number>((state) => state.terminal.opacity);
   const [opacity, setOpacity] = useState<number>(terminalOpacity);
@@ -43,7 +42,7 @@ export default function () {
             }}
             min={0}
             max={20}
-            onChange={(e, value) => handleBlur(Number(value))}
+            onChange={(_, value) => handleBlur(Number(value))}
           />
         </Grid>
 
@@ -64,7 +63,7 @@ export default function () {
             min={0}
             max={1}
             step={0.1}
-            onChange={(e, value) => handleOpacity(Number(value))}
+            onChange={(_, value) => handleOpacity(Number(value))}
           />
         </Grid>
       </Grid>

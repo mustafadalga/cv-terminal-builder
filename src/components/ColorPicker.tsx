@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Typography, Grid } from "@mui/material";
 import InputColor, { Color } from "react-input-color";
-interface Props {
+
+interface ColorPickerProps {
   initialColor: string;
   label: string;
   onColorChange: (hexColor: string) => void;
@@ -11,18 +12,19 @@ export default function ColorPicker({
   initialColor,
   label,
   onColorChange,
-}: Props) {
+}: ColorPickerProps) {
   const [color, setColor] = useState<string>(initialColor);
-  const changeColor = (color: Color) => {
+
+  const changeColor = useCallback((color: Color) => {
     setColor(color.hex);
     onColorChange(color.hex);
-  };
+  }, [onColorChange]);
 
   useEffect(() => {
     if (initialColor !== color) {
       setColor(initialColor);
     }
-  }, [initialColor]);
+  }, [initialColor, color]);
 
   return (
     <Grid container>
@@ -32,12 +34,13 @@ export default function ColorPicker({
         </Typography>
       </Grid>
       <Grid item xs={12}>
-        <InputColor
-          initialValue={color || ""}
-          onChange={changeColor}
-          placement="center"
-          style={{ width: "100%" }}
-        />
+        <div style={{ width: "100%" }}>
+          <InputColor
+            initialValue={color || ""}
+            onChange={changeColor}
+            placement="center"
+          />
+        </div>
       </Grid>
     </Grid>
   );

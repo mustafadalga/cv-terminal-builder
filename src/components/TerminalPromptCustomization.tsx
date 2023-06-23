@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useStore } from "@/store";
 import { TextField } from "@mui/material";
 
-export default function () {
+export default function TerminalPromptCustomization() {
   const defaultPrompt: string = useStore((state) => state.terminal.prompt);
   const [prompt, setPrompt] = useState<string>(defaultPrompt);
 

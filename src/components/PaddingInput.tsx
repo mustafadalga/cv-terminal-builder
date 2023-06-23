@@ -1,10 +1,10 @@
 import {  Typography, Grid, Slider, SliderValueLabel } from '@mui/material';
 import { useState } from "react";
 import { useStore } from "@/store";
-import type { MarginPadding } from "@/types";
+import type { MarginPadding } from "@/store";
 import Box from "./Box";
 
-export default function () {
+export default function PaddingInput() {
     const defaultPadding = useStore<MarginPadding>(
         (state) => state.terminal.padding
       );
@@ -16,9 +16,7 @@ export default function () {
           [property]: value,
         };
         setPadding(updatedPadding);
-        useStore.setState((state) => ({
-          terminal: { ...state.terminal, padding: updatedPadding },
-        }));
+        useStore.getState().setTerminalPadding(updatedPadding);
       };
       return (
         <Box>
@@ -38,7 +36,7 @@ export default function () {
                 slots={{
                   valueLabel: SliderValueLabel,
                 }}
-                onChange={(e, value) => handlePaddingChange("top", Number(value))}
+                onChange={(_, value) => handlePaddingChange("top", Number(value))}
               />
             </Grid>
             <Grid item xs={6}>
@@ -53,7 +51,7 @@ export default function () {
                 slots={{
                   valueLabel: SliderValueLabel,
                 }}
-                onChange={(e, value) => handlePaddingChange("bottom", Number(value))}
+                onChange={(_, value) => handlePaddingChange("bottom", Number(value))}
               />
             </Grid>
             <Grid item xs={6}>
@@ -68,7 +66,7 @@ export default function () {
                 slots={{
                   valueLabel: SliderValueLabel,
                 }}
-                onChange={(e, value) => handlePaddingChange("left", Number(value))}
+                onChange={(_, value) => handlePaddingChange("left", Number(value))}
               />
             </Grid>
             <Grid item xs={6}>
@@ -83,7 +81,7 @@ export default function () {
                   valueLabel: SliderValueLabel,
                 }}
                 value={padding.right}
-                onChange={(e, value) => handlePaddingChange("right", Number(value))}
+                onChange={(_, value) => handlePaddingChange("right", Number(value))}
               />
             </Grid>
           </Grid>

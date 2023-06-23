@@ -5,7 +5,6 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
-  type SelectChangeEvent,
 } from "@mui/material";
 
 const fontFamilies: string[] = [
@@ -27,7 +26,7 @@ const menuItemStyles = {
   },
 };
 
-export default function () {
+export default function FontFamilyInput() {
   const defaultFontFamily: string = useStore(
     (state) => state.terminal.fontFamily
   );
@@ -47,11 +46,9 @@ export default function () {
         Font Family
       </InputLabel>
       <Select
-        labelId="demo-simple-select-standard-label"
         label="Font Family"
         value={fontFamily}
         onChange={(e) => handleInput(e.target.value)}
-        id="demo-simple-select-standard"
         sx={menuItemStyles}
       >
         {fontFamilies.map((fontFamily, index) => {
