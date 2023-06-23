@@ -11,10 +11,6 @@ const styles = {
     gap: "12px",
     gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
   },
-  fontSize: {
-    fontSize: 13,
-  }
-  //...
 };
 
 export default function BoxShadowCustomization() {
@@ -41,9 +37,7 @@ export default function BoxShadowCustomization() {
         sx={styles.gridStyles}
       >
         <Grid container>
-          <Typography
-            sx={styles.fontSize}
-          >
+        <Typography variant="body2">
             Horizontal Length
           </Typography>
           <Slider
@@ -58,11 +52,7 @@ export default function BoxShadowCustomization() {
           />
         </Grid>
         <Grid container>
-          <Typography
-            sx={{
-              fontSize: 13,
-            }}
-          >
+        <Typography variant="body2">
             Vertical Length
           </Typography>
           <Slider
@@ -77,11 +67,7 @@ export default function BoxShadowCustomization() {
           />
         </Grid>
         <Grid container>
-          <Typography
-            sx={{
-              fontSize: 13,
-            }}
-          >
+        <Typography variant="body2">
             Blur Radius
           </Typography>
           <Slider

@@ -21,11 +21,11 @@ const createState = (set: StoreApi<State>["setState"]): State => ({
   terminal: {
     prompt: "root > ",
     fontFamily: "'JetBrains Mono', monospace",
-    fontSize: 14,
+    fontSize: 12,
     pageColor: "#16213e",
     defaultImage:
       "https://images.unsplash.com/photo-1530692228265-084b21566b12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1926&q=80",
-    isBackgroundImageEnabled: true,
+    isBackgroundImageEnabled: false,
     pageBackgroundImage: "",
     terminalColor: "#16213e",
     textColor: "#00FF00",
@@ -35,8 +35,8 @@ const createState = (set: StoreApi<State>["setState"]): State => ({
     textShadow: {
       xOffset: 0,
       yOffset: 0,
-      blurRadius: 5,
-      color: "#000000",
+      blurRadius: 0,
+      color: "#00ff00",
     },
     boxShadow: {
       xOffset: 0,
@@ -52,12 +52,12 @@ const createState = (set: StoreApi<State>["setState"]): State => ({
     },
     size: {
       cols: 120,
-      rows: 40,
+      rows: 32,
     },
     margin: {
-      left: 40,
+      left: 100,
       right: 40,
-      top: 32,
+      top: 50,
       bottom: 12,
     },
     padding: {

@@ -15,17 +15,11 @@ export default function FontSizeInput() {
       label="Font Size"
       type="number"
       fullWidth
-      size="small"
       variant="standard"
       defaultValue={fontSize}
-      InputLabelProps={{
-        shrink: true,
-        sx: { fontSize: 13 }
-      }}
       inputProps={{
         min: 10,
         max: 24,
-        style: { fontSize: 13 },
       }}
       onChange={(e) => handleInput(parseInt(e.target.value))}
     />

@@ -29,11 +29,7 @@ export default function SizeCustomization() {
       </Typography>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <Typography
-            sx={{
-              fontSize: 13,
-            }}
-          >
+          <Typography variant="body2" >
             Terminal Width (Cols)
           </Typography>
           <Slider
@@ -51,11 +47,7 @@ export default function SizeCustomization() {
         </Grid>
 
         <Grid item xs={12}>
-          <Typography
-            sx={{
-              fontSize: 13,
-            }}
-          >
+          <Typography variant="body2" >
             Terminal Height (Rows)
           </Typography>
           <Slider

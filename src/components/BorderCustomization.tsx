@@ -1,5 +1,4 @@
 import {
-  TextField,
   Typography,
   Select,
   MenuItem,
@@ -13,6 +12,7 @@ import Box from "./Box";
 import { useState } from "react";
 import { useStore } from "@/store";
 import type { Border } from "@/store";
+import ColorPicker from "./ColorPicker";
 
 const borderStyles: string[] = [
   "none",
@@ -26,18 +26,16 @@ const borderStyles: string[] = [
   "inset",
   "outset",
 ];
-const menuItemStyles = {
-  fontSize: 13,
-  "&.Mui-selected": {
-    backgroundColor: "transparent",
-  },
-};
 
 const boxStyles = {
   display: "grid",
   gap: "12px",
   gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
 };
+const formControlStyle={
+  marginTop:"20px",
+  marginBottom:"20px",
+}
 
 export default function BorderCustomization() {
   const defaultBorder = useStore<Border>((state) => state.terminal.border);
@@ -68,12 +66,8 @@ export default function BorderCustomization() {
       </Typography>
       <Box sx={boxStyles}>
         <Grid container>
-          <Typography
-            sx={{
-              fontSize: 13,
-            }}
-          >
-            Border Width
+        <Typography variant="body2">
+            Width
           </Typography>
           <Slider
             value={border.width}
@@ -84,51 +78,34 @@ export default function BorderCustomization() {
             onChange={(_, value) => handleBorderChange("width", Number(value))}
           />
         </Grid>
-        <TextField
-          label="Border Color"
-          type="color"
-          fullWidth
-          InputLabelProps={{
-            shrink: true,
-          }}
-          variant="standard"
-          value={border.color}
-          onChange={(e) => handleBorderChange("color", e.target.value)}
+      <Grid container>
+        <ColorPicker
+                  initialColor={border.color}
+                  label="Color"
+                  onColorChange={(color: string) =>
+                    handleBorderChange("color", color)
+                  }
         />
+      </Grid>
       </Box>
-      <FormControl variant="standard" size="small" fullWidth>
-        <InputLabel
-          id="demo-simple-select-standard-label"
-          sx={{ fontSize: 13 }}
-        >
-          Border Style
+      <FormControl variant="standard" size="small" fullWidth sx={formControlStyle}>
+        <InputLabel>
+          Style
         </InputLabel>
         <Select
-          labelId="demo-simple-select-standard-label"
-          label="Border Style"
+          label="Style"
           value={border.style}
-          onChange={(e) => handleBorderChange("style", e.target.value)}
-          id="demo-simple-select-standard"
-          sx={menuItemStyles}
-        >
+          onChange={(e) => handleBorderChange("style", e.target.value)}>
           {borderStyles.map((borderStyle) => (
-            <MenuItem
-              key={borderStyle}
-              value={borderStyle}
-              sx={{ fontSize: 13 }}
-            >
+            <MenuItem key={borderStyle} value={borderStyle}>
               {borderStyle}
             </MenuItem>
           ))}
         </Select>
       </FormControl>
       <Grid container>
-        <Typography
-          sx={{
-            fontSize: 13,
-          }}
-        >
-          Border Radius
+      <Typography variant="body2">
+          Radius
         </Typography>
         <Slider
           value={borderRadius}

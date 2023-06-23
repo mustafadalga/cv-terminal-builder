@@ -26,7 +26,8 @@ export default function useApplyStyles(
       textArea.style.opacity = "0";
 
       if (store.terminal.isBackgroundImageEnabled) {
-        terminalContainer.style.backgroundImage = `url(${store.terminal.pageBackgroundImage})`;
+        terminalContainer.style.background = `url(${store.terminal.pageBackgroundImage}) center/cover no-repeat fixed`;
+
       } else {
         terminalContainer.style.backgroundColor = store.terminal.pageColor;
         terminalContainer.style.backgroundImage = "unset";

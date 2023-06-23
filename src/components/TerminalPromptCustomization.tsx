@@ -15,6 +15,7 @@ export default function TerminalPromptCustomization() {
     <TextField
       label="Prompt"
       variant="standard"
+      size="medium"
       fullWidth
       defaultValue={prompt}
       onChange={(e) => handleInput(e.target.value)}

@@ -19,12 +19,6 @@ const fontFamilies: string[] = [
   "'Space Mono', monospace",
   "'Ubuntu Mono', monospace",
 ];
-const menuItemStyles = {
-  fontFamily: 13,
-  "&.Mui-selected": {
-    backgroundColor: "transparent",
-  },
-};
 
 export default function FontFamilyInput() {
   const defaultFontFamily: string = useStore(
@@ -39,23 +33,19 @@ export default function FontFamilyInput() {
 
   return (
     <FormControl variant="standard" size="small" fullWidth>
-      <InputLabel
-        id="demo-simple-select-standard-label"
-        sx={{ fontFamily: 13 }}
-      >
+      <InputLabel>
         Font Family
       </InputLabel>
       <Select
         label="Font Family"
         value={fontFamily}
         onChange={(e) => handleInput(e.target.value)}
-        sx={menuItemStyles}
       >
         {fontFamilies.map((fontFamily, index) => {
           const fontFamilyName = fontFamily.match(/'([^']+)'/)?.[1];
 
           return (
-            <MenuItem key={index} value={fontFamily} sx={{ fontFamily: 13 }}>
+            <MenuItem key={index} value={fontFamily}>
               {fontFamilyName}
             </MenuItem>
           );

@@ -8,6 +8,7 @@ interface ColorPickerProps {
   onColorChange: (hexColor: string) => void;
 }
 
+
 export default function ColorPicker({
   initialColor,
   label,
@@ -27,21 +28,23 @@ export default function ColorPicker({
   }, [initialColor, color]);
 
   return (
-    <Grid container>
+    <Grid container gap={0.5}>
       <Grid item xs={12}>
-        <Typography variant="caption" color="text.secondary">
+        <Typography variant="body2" color="text.secondary">
           {label}
         </Typography>
       </Grid>
       <Grid item xs={12}>
-        <div style={{ width: "100%" }}>
-          <InputColor
-            initialValue={color || ""}
-            onChange={changeColor}
-            placement="center"
-          />
-        </div>
-      </Grid>
+  <div style={{ width: "100%" }}>
+    <InputColor
+      initialValue={color || ""}
+      onChange={changeColor}
+      placement="center"
+      {...{ style: { width: "100%" } }}
+    />
+  </div>
+</Grid>
+
     </Grid>
   );
 }

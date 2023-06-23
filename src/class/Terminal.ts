@@ -34,7 +34,6 @@ export class CVTerminal {
 
   openTerminal(container: HTMLElement) {
     this.terminal.open(container);
-    this.terminal.focus();
   }
   writeWelcomeMessage() {
     this.terminal.writeln("Welcome to My CV!");

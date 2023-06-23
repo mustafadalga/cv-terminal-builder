@@ -27,11 +27,7 @@ export default function GlassmorphismCustomization() {
       </Typography>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <Typography
-            sx={{
-              fontSize: 13,
-            }}
-          >
+          <Typography variant="body2">
             Blur
           </Typography>
           <Slider
@@ -47,11 +43,7 @@ export default function GlassmorphismCustomization() {
         </Grid>
 
         <Grid item xs={12}>
-          <Typography
-            sx={{
-              fontSize: 13,
-            }}
-          >
+          <Typography variant="body2">
             Opacity
           </Typography>
           <Slider

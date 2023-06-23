@@ -36,11 +36,7 @@ export default function TextShadow() {
                 }}
             >
                 <Grid container>
-                    <Typography
-                        sx={{
-                            fontSize: 13,
-                        }}
-                    >
+                    <Typography variant="body2">
                         Horizontal Length
                     </Typography>
                     <Slider
@@ -56,11 +52,7 @@ export default function TextShadow() {
                 </Grid>
 
                 <Grid container>
-                    <Typography
-                        sx={{
-                            fontSize: 13,
-                        }}
-                    >
+                <Typography variant="body2">
                         Vertical Length
                     </Typography>
                     <Slider
@@ -76,12 +68,8 @@ export default function TextShadow() {
                 </Grid>
 
                 <Grid container>
-                    <Typography
-                        sx={{
-                            fontSize: 13,
-                        }}
-                    >
-                        Blur Radius {textShadow.color}
+                <Typography variant="body2">
+                        Blur Radius
                     </Typography>
                     <Slider
                         value={textShadow.blurRadius}
