@@ -1,5 +1,5 @@
 import { StoreApi, create } from "zustand";
-import { devtools } from "zustand/middleware";
+import { devtools,persist } from "zustand/middleware";
 import type {
   Border,
   Shadow,
@@ -25,8 +25,8 @@ const createState = (set: StoreApi<State>["setState"]): State => ({
     pageColor: "#16213e",
     defaultImage:
       "https://images.unsplash.com/photo-1530692228265-084b21566b12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1926&q=80",
-    isBackgroundImageEnabled: false,
-    pageBackgroundImage: "",
+    isBackgroundImageEnabled: true,
+    pageBackgroundImage: "https://images.unsplash.com/photo-1530692228265-084b21566b12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1926&q=80",
     terminalColor: "#16213e",
     textColor: "#00FF00",
     cursorColor: "#00FF00",
@@ -168,8 +168,17 @@ const createState = (set: StoreApi<State>["setState"]): State => ({
     })),
 });
 
-const createStore = create(devtools(createState));
 
-createStore.getState().setDefaultBackgroundImage();
+const PERSISTED_STATE_KEY = "cv-terminal-builer";
+
+const createStore = create(
+  persist(
+    devtools(createState),
+    {
+      name: PERSISTED_STATE_KEY
+    }
+  )
+);
+
 
 export const useStore = createStore;
