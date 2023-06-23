@@ -16,7 +16,16 @@ export default defineConfig({
         port: 8080,
         host: "::", //'0.0.0.0',
     },
-
+    build:{
+        rollupOptions:{
+            output:{
+                manualChunks:{
+                    'material-ui': ['@mui/material'],
+                    'material-ui-icons': ['@mui/icons-material'],
+                }
+            }
+        }
+    }
 })
 
 

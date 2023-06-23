@@ -4,8 +4,8 @@ import {
   styled,
   Box,
 } from "@mui/material";
-import ContentPasteIcon from "@mui/icons-material/ContentPaste";
-import CheckIcon from "@mui/icons-material/Check";
+import { ContentPaste } from "@mui/icons-material";
+import { Check } from "@mui/icons-material";
 
 const StyledCopyButton = styled(Box)(({ theme }) => ({
   color: "#fff",
@@ -41,12 +41,12 @@ export default function ClipboardButton({ code }: { code: string }) {
     <StyledCopyButton onClick={handleCopyClick}>
       {copied ? (
         <>
-          <CheckIcon />
+          <Check />
           <Typography variant="subtitle1">Copied!</Typography>
         </>
       ) : (
         <>
-          <ContentPasteIcon />
+          <ContentPaste />
           <Typography variant="subtitle1">Copy code</Typography>
         </>
       )}

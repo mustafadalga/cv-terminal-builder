@@ -4,9 +4,9 @@ import URLInput from "@/components/URLInput";
 import FileUpload from "@/components/FileUpload";
 import { Grid, Typography } from "@mui/material";
 import Box from "./Box";
-import ReplayIcon from "@mui/icons-material/Replay";
-import HideImageIcon from "@mui/icons-material/HideImage";
-import ImageIcon from "@mui/icons-material/Image";
+import { Replay } from "@mui/icons-material";
+import { HideImage } from "@mui/icons-material";
+import { Image } from "@mui/icons-material";
 
 export default function BackgroundInput() {
   const [validationMessage, setValidationMessage] = useState<string>("");
@@ -90,13 +90,13 @@ export default function BackgroundInput() {
           />
         </Grid>
         <Grid item container xs={12} justifyContent="center" gap={1}>
-         <ReplayIcon 
+         <Replay 
                className="icon"
                      onClick={resetForm} />
 
 {isBackgroundImageEnabled ? 
-<ImageIcon        className="icon"  onClick={() => toggleBackground()}/> : 
-<HideImageIcon         className="icon"  onClick={() => toggleBackground()}/>}
+<Image        className="icon"  onClick={() => toggleBackground()}/> : 
+<HideImage         className="icon"  onClick={() => toggleBackground()}/>}
 
          </Grid>
         {validationMessage && (

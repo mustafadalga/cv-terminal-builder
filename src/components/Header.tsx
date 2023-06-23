@@ -1,5 +1,5 @@
 import { useStore } from "@/store";
-import GitHubIcon from "@mui/icons-material/GitHub";
+import { GitHub } from "@mui/icons-material";
 import { AppBar, Toolbar, Typography, IconButton, Button,styled } from "@mui/material";
 
 interface Props {
@@ -34,7 +34,7 @@ export default function Header({ title, githubUrl }: Props) {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <GitHubIcon />
+          <GitHub />
         </IconButton>
       </Toolbar>
     </StyledAppBar>

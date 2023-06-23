@@ -11,7 +11,7 @@ import {
   StyledClipboardButtonContainer,
 } from "@/styled-components";
 
-import CloseIcon from "@mui/icons-material/Close";
+import { Close } from "@mui/icons-material";
 import ClipboardButton from "./ClipboardButton";
 import {
   generateCVIntegration,
@@ -49,7 +49,7 @@ export default function GeneratedCodeModal() {
     <StyledModal open={true} onClose={() => setModalOpenStatus(false)}>
       <StyledBox>
         <StyledCloseButton onClick={() => setModalOpenStatus(false)}>
-          <CloseIcon />
+          <Close />
         </StyledCloseButton>
         <StyledTypography variant="h4">Generated Code</StyledTypography>
         <StyledClipboardButtonContainer>
