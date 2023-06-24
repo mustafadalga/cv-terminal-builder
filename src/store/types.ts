@@ -44,6 +44,7 @@ export interface Border {
     blur: number;
     opacity: number;
     size: Size;
+    screenWidth: number;
     margin: MarginPadding;
     padding: MarginPadding;
   }
@@ -76,5 +77,6 @@ export interface Border {
     setJsonCV: (cv: CV) => void;
     createCommands: (commands: string[]) => void;
     setTerminalSize: (size: Size) => void;
+    setTerminalScreenWidth: (screenWidth: number) => void;
     setModalOpenStatus: (isModalOpen: boolean) => void;
   }

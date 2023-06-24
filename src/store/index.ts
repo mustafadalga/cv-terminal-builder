@@ -1,12 +1,6 @@
 import { StoreApi, create } from "zustand";
-import { devtools,persist } from "zustand/middleware";
-import type {
-  Border,
-  Shadow,
-  MarginPadding,
-  Size,
-  State,
-} from "./types";
+import { devtools, persist } from "zustand/middleware";
+import type { Border, Shadow, MarginPadding, Size, State } from "./types";
 import type { CV } from "@/types";
 export type {
   Border,
@@ -14,8 +8,8 @@ export type {
   MarginPadding,
   Size,
   State,
-  StateTerminal
-} from "./types"
+  StateTerminal,
+} from "./types";
 
 const createState = (set: StoreApi<State>["setState"]): State => ({
   terminal: {
@@ -26,7 +20,8 @@ const createState = (set: StoreApi<State>["setState"]): State => ({
     defaultImage:
       "https://images.unsplash.com/photo-1530692228265-084b21566b12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1926&q=80",
     isBackgroundImageEnabled: true,
-    pageBackgroundImage: "https://images.unsplash.com/photo-1530692228265-084b21566b12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1926&q=80",
+    pageBackgroundImage:
+      "https://images.unsplash.com/photo-1530692228265-084b21566b12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1926&q=80",
     terminalColor: "#16213e",
     textColor: "#00FF00",
     cursorColor: "#00FF00",
@@ -54,6 +49,7 @@ const createState = (set: StoreApi<State>["setState"]): State => ({
       cols: 120,
       rows: 32,
     },
+    screenWidth: 0,
     margin: {
       left: 100,
       right: 40,
@@ -161,6 +157,16 @@ const createState = (set: StoreApi<State>["setState"]): State => ({
         size,
       },
     })),
+  setTerminalScreenWidth: (screenWidth: number) =>
+    set((state) => ({
+      terminal: {
+        ...state.terminal,
+        screenWidth:
+          screenWidth +
+          state.terminal.padding.left +
+          state.terminal.padding.right,
+      },
+    })),
   setModalOpenStatus: (isModalOpen: boolean) =>
     set((state) => ({
       ...state,
@@ -168,17 +174,12 @@ const createState = (set: StoreApi<State>["setState"]): State => ({
     })),
 });
 
-
 const PERSISTED_STATE_KEY = "cv-terminal-builer";
 
 const createStore = create(
-  persist(
-    devtools(createState),
-    {
-      name: PERSISTED_STATE_KEY
-    }
-  )
+  persist(devtools(createState), {
+    name: PERSISTED_STATE_KEY,
+  })
 );
-
 
 export const useStore = createStore;

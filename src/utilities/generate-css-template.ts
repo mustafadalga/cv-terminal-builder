@@ -15,6 +15,7 @@ export default function generateCSSTemplate(store: State): string {
       store.terminal.opacity
     );
     const terminalScreenBackgroundColor = pageRGBABackgroundColor;
+    const terminalScreenWidth = `${store.terminal.screenWidth}px`;
     const terminalElementPadding = `${store.terminal.margin.top}px ${store.terminal.margin.right}px ${store.terminal.margin.bottom}px ${store.terminal.margin.left}px`;
     const terminalScreenPadding = `${store.terminal.padding.top}px ${store.terminal.padding.right}px ${store.terminal.padding.bottom}px ${store.terminal.padding.left}px`;
     const terminalScreenBorder = `${store.terminal.border.width}px ${store.terminal.border.style} ${store.terminal.border.color}`;
@@ -35,6 +36,7 @@ export default function generateCSSTemplate(store: State): string {
       inset: 0;
     }
     .xterm-screen {
+      width:${terminalScreenWidth}!important;
       background: ${terminalScreenBackgroundColor};
       backdrop-filter: ${blur};
       padding: ${terminalScreenPadding};
