@@ -1,6 +1,6 @@
 # 💻 CV Terminal Builder
 
-**A powerful and customizable online CV generator with terminal aesthetics**
+**A powerful and customizable online interactive CV generator with terminal aesthetics**
 
 <h6 align="center">
 <img alt="CV Terminal Builder" src="https://github.com/mustafadalga/cv-terminal-builder/assets/25087769/6e47ecb5-8279-423f-9b85-b7fd5308b580">   <br>
