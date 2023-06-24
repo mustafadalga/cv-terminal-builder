@@ -10,7 +10,10 @@ import { Image } from "@mui/icons-material";
 
 export default function BackgroundInput() {
   const [validationMessage, setValidationMessage] = useState<string>("");
-  const [url, setURL] = useState<string>("");
+  const initialURL = useStore<string>(
+    (state) => state.terminal.pageBackgroundImage
+  );
+  const [url, setURL] = useState<string>(initialURL || "");
   const setDefaultBackgroundImage = useStore(
     (state: State) => state.setDefaultBackgroundImage
   );
@@ -32,7 +35,7 @@ export default function BackgroundInput() {
 
   const handleURL = async (url: string) => {
     resetForm();
-    if (!url.length){
+    if (!url.length) {
       return setValidationMessage("Please enter a valid url!");
     }
 
@@ -90,15 +93,14 @@ export default function BackgroundInput() {
           />
         </Grid>
         <Grid item container xs={12} justifyContent="center" gap={1}>
-         <Replay 
-               className="icon"
-                     onClick={resetForm} />
+          <Replay className="icon" onClick={resetForm} />
 
-{isBackgroundImageEnabled ? 
-<Image        className="icon"  onClick={() => toggleBackground()}/> : 
-<HideImage         className="icon"  onClick={() => toggleBackground()}/>}
-
-         </Grid>
+          {isBackgroundImageEnabled ? (
+            <Image className="icon" onClick={() => toggleBackground()} />
+          ) : (
+            <HideImage className="icon" onClick={() => toggleBackground()} />
+          )}
+        </Grid>
         {validationMessage && (
           <Grid item xs={12}>
             <Typography color="error">{validationMessage}</Typography>
