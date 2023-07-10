@@ -140,6 +140,7 @@ export class CVTerminal {
   private handleBackspace() {
     if (this.cursorX > this.promptLength) {
       this.terminal.write("\b \b");
+      this.command = this.command.slice(0, -1);
       this.cursorX--;
     }
   }
